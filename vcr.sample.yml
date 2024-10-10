@@ -1,0 +1,24 @@
+project:
+  name: verify-ratelimit
+instance:
+  name: dev
+  runtime: nodejs22
+  region: aws.euw1
+  application-id: 1sdsdsdsds
+  capabilities:
+    - messaging
+  entrypoint:
+    - node
+    - index.js
+  environment:
+    - name: SECONDARY_KEY
+      secret: apiKey
+    - name: SECONDARY_SECRET
+      secret: apiSecret
+debug:
+  name: debug
+  application-id: asdsdsdsdsds
+  entrypoint:
+    - nodemon
+    - --inspect
+    - index.js
