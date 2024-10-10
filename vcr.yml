@@ -1,0 +1,24 @@
+project:
+  name: payoneer-ratelimit
+instance:
+  name: dev
+  runtime: nodejs22
+  region: aws.euw1
+  application-id: 1433d7c0-73bc-4c2b-a043-2c161bd8a3c2
+  capabilities:
+    - messaging
+  entrypoint:
+    - node
+    - index.js
+  environment:
+    - name: SECONDARY_KEY
+      secret: apiKey
+    - name: SECONDARY_SECRET
+      secret: apiSecret
+debug:
+  name: debug
+  application-id: 6742d9f9-d461-4cc4-bbb5-118e66cc9204
+  entrypoint:
+    - nodemon
+    - --inspect
+    - index.js
