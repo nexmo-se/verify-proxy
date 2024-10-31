@@ -91,6 +91,8 @@ curl -X PATCH https://{APP_URL}/profiles/apply-rate-limit \
 
 ```
 
+## Deleting a rate limit
+
 You can create another rate limit and apply it to the same profile. For instance maximum of 5 requests per hour.
 
 ```
