@@ -34,7 +34,6 @@ export default function Router(dbState) {
   router.get('/rate-limit-profile/:id', async (req, res) => {
     try {
       const { id } = req.params;
-      console.log('aqui');
       console.log(id);
       const respRateLimits = await dbState.get(`rateLimitProfile:${id}`);
 

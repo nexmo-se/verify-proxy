@@ -11,8 +11,9 @@ export const checkWhitelistMiddleware = async (req, res, next) => {
 
     if (!whitelisted) {
       const token = Buffer.from(`${process.env.SECONDARY_KEY}:${process.env.SECONDARY_SECRET}`).toString('base64');
+      // const apiKey = token
       req.headers['authorization'] = `Basic ${token}`;
-      console.log('replacing token');
+
       // return next();
       // return res.status(403).json({ error: 'Number is not whitelisted.' });
     }

@@ -7,10 +7,13 @@ export default function Router(rateLimit, checkWhitelistMiddleware) {
   router.post('/', rateLimit, checkWhitelistMiddleware, async (req, res) => {
     try {
       const token = req.headers['authorization'];
+      const onlyToken = token.split('Basic')[1];
+      const [apiKey, secret] = Buffer.from(onlyToken, 'base64').toString('utf8').split(':');
       const { rateLimits, ...verifyBody } = req.body;
       const [{ to }] = verifyBody.workflow;
       const verifyResponse = await sendVerify(verifyBody, token);
-      res.status(200).json({ message: `Verification request to ${to} has been processed`, verifyResponse });
+      const verifyWithApiKey = { ...verifyResponse, apiKey };
+      res.status(200).json({ message: `Verification request to ${to} has been processed`, verifyWithApiKey });
       // res.status(200).json({ message: `Verification request to ${to} has been processed` });
     } catch (e) {
       if (e.response && e.response.data) {
