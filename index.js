@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import { vcr } from '@vonage/vcr-sdk';
 import profileRouter from './routes/rate-logic.js';
 import filterRouter from './routes/whitelist.js';
+import checkCodeRouter from './routes/checkcode.js';
 import verifyRouter from './routes/verify.js';
 import fakeverifyRouter from './routes/fakeverify.js';
 import counter from './routes/counter.js';
@@ -33,9 +34,10 @@ app.get('/_/metrics', async (req, res) => {
   return res.sendStatus(200);
 });
 // Register routes
-app.use('/', handleAuth);
-app.use('/verify', verifyRouter(rateLimit, checkWhitelistMiddleware));
+// app.use('/', handleAuth);
+app.use('/verify', verifyRouter(rateLimit, checkWhitelistMiddleware, dbState));
 app.use('/fakeverify', fakeverifyRouter(rateLimit, checkWhitelistMiddleware));
+// app.use('/checkCodeRouter', checkCodeRouter(dbState));
 app.use('/whitelist', filterRouter());
 app.use('/profiles', profileRouter(dbState));
 app.use('/counter', counter(dbState));
